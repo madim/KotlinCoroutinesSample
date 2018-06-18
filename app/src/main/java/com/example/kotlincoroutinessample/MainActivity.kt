@@ -30,26 +30,7 @@ class MainActivity : AppCompatActivity() {
         hello = findViewById<TextView>(R.id.hello)
         val fab = findViewById<FloatingActionButton>(R.id.fab)
 
-        val protocol = Protocol("950903301272", "Madi", "Myrzabek", "Ulanovich",
-                "123456789123456", "03.09.2017", "kbk", "kno", "knp", 12000)
-        val intent = Intent(Intent.ACTION_SEND)
-        intent.putExtra(Intent.EXTRA_TEXT, Gson().toJson(protocol))
-        intent.setType("text/plain");
-
-        fab.setOnClickListener {
-            startActivityForResult(Intent.createChooser(intent, "Share"), PAYMENT_REQUEST_CODE)
-        }
-//        setup(hello, fab)
-    }
-
-    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
-        when (requestCode) {
-            PAYMENT_REQUEST_CODE -> {
-                val result = data?.getIntExtra(PAYMENT_RESULT_EXTRA, -1)
-                hello.text = "resultCode: $resultCode \n result: $result"
-            }
-            else -> super.onActivityResult(requestCode, resultCode, data)
-        }
+        setup(hello, fab)
     }
 
     fun setup(hello: TextView, fab: FloatingActionButton) {
